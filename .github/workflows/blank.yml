@@ -1,17 +1,16 @@
-name: Deploy APP1
+name: Deploy APP2
 
 on:
   push:
     branches: [ "main" ]
 
 concurrency:
-  group: app1-deploy
+  group: app2-deploy
   cancel-in-progress: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,8 +44,8 @@ jobs:
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
             "sudo nginx -t && sudo systemctl reload nginx"
 
-      - name: Health check (port 2000)
+      - name: Health check (port 3000)
         run: |
           ssh -o StrictHostKeyChecking=no \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            "curl -sSIL -m 5 http://localhost:2000 | head -n1"
+            "curl -sSIL -m 5 http://localhost:3000 | head -n1"
