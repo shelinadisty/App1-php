@@ -1,2 +1,2 @@
 <?php
-echo "APP 2 berjalan di port 3000";
+echo "APP 2 berhasil dijalankan di port 3000!";
